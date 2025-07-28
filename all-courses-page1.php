@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Các Khóa Học Nổi Bật | CodeCrafted</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="all-course.css" />
 
 </head>
@@ -14,7 +14,7 @@
 
       <div id="wrapper">
         <div id="header">
-            <a href="#" class="logo">
+            <a href="index.php" class="logo">
                 <span>CODE HAY</span>
             </a>
             <div id="menu">
