@@ -100,7 +100,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button class="btn-primary">Tìm hiểu thêm</button>
                 </div>
                 <div class="course-card">
-                    <img src="assets/course_python.jpg" alt="Python Course">
+                    <img src="assets/course_python.png" alt="Python Course">
                     <h3>Lập Trình Python Từ A-Z</h3>
                     <p>Học Python để phát triển web, AI và phân tích dữ liệu.</p>
                     <div class="course-meta">
