@@ -23,7 +23,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="wrapper">
         <div id="header">
             <a href="#" class="logo">
-                <span>CODE HAY</span>
+                <span>CODE HAY Ne</span>
             </a>
             <div id="menu">
                 <div class="item"><a href="#banner">Trang chủ</a></div>
