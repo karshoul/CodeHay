@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Các Khóa Học Nổi Bật - Trang 2 | CodeCrafted</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="all-course.css" />
+  <link rel="stylesheet" href="assets/css/all-course.css" />
 </head>
 
 <body>
@@ -29,7 +28,7 @@
                             Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                         <a href="logout.php" style="margin-left: 15px;">
-                        <img src="assets/logout.png" alt="Logout" style="width: 22px; height: auto;">
+                        <img src="assets/img/logout.png" alt="Logout" style="width: 22px; height: auto;">
                         </a>
 
 
@@ -60,7 +59,7 @@
 
         foreach ($courses2 as $c) {
           echo "<div class='course-card'>
-                  <img src='assets/$c[0]' alt='$c[1]'>
+                  <img src='assets/img/$c[0]' alt='$c[1]'>
                   <h3>$c[1]</h3>
                   <p>$c[2]</p>
                   <div class='course-meta'>

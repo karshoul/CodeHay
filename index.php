@@ -15,12 +15,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CODE HAY</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="includeHTML.js" defer></script>
 </head>
 
 <body>
-    <div id="wrapper">
+<div include-html="header.php"></div>
+    <!-- <div id="wrapper">
         <div id="header">
             <a href="#" class="logo">
                 <span>CODE HAY</span>
@@ -30,7 +32,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="item"><a href="#courses-section">Khoá học</a></div>
                 <div class="item"><a href="#blog-section">Blog</a></div>
                 <div class="item"><a href="#contact-section">Liên hệ</a></div>
-            </div>
+            </div> -->
             <div class="actions">
                 <div class="item">
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -38,10 +40,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                         <a href="logout.php" style="margin-left: 15px;">
-                            <img src="assets/logout.png" alt="Logout" style="width: 22px; height: auto;">
+                            <img src="assets/img/logout.png" alt="Logout" style="width: 22px; height: auto;">
                         </a>
                     <?php else: ?>
-                        <a href="login.php" style="text-decoration: none;"> <img src="assets/user.png" alt="User" style="width: 22px; height: auto;">
+                        <a href="login.php" style="text-decoration: none;"> <img src="assets/img/user.png" alt="User" style="width: 22px; height: auto;">
                         </a>
                     <?php endif; ?>
                 </div>
@@ -68,7 +70,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <h2 class="section-title">Các Khoá Học Nổi Bật</h2>
             <div class="courses-container">
                 <div class="course-card">
-                    <img src="assets/course_html_css.jpg" alt="HTML CSS Course">
+                    <img src="assets/img/course_html_css.jpg" alt="HTML CSS Course">
                     <h3>Khoá Học HTML & CSS Cơ Bản</h3>
                     <p>Xây dựng giao diện website đầu tiên của bạn với HTML và CSS.</p>
                     <div class="course-meta">
@@ -78,7 +80,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button class="btn-primary">Tìm hiểu thêm</button>
                 </div>
                 <div class="course-card">
-                    <img src="assets/course_javascript.jpg" alt="JavaScript Course">
+                    <img src="assets/img/course_javascript.jpg" alt="JavaScript Course">
                     <h3>Khoá Học JavaScript Toàn Diện</h3>
                     <p>Làm chủ JavaScript, thêm tương tác và logic cho website.</p>
                     <div class="course-meta">
@@ -88,7 +90,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button class="btn-primary">Tìm hiểu thêm</button>
                 </div>
                 <div class="course-card">
-                    <img src="assets/course_react.jpg" alt="ReactJS Course">
+                    <img src="assets/img/course_react.jpg" alt="ReactJS Course">
                     <h3>Phát Triển Web với ReactJS</h3>
                     <p>Xây dựng ứng dụng web hiện đại với thư viện ReactJS.</p>
                     <div class="course-meta">
@@ -98,7 +100,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button class="btn-primary">Tìm hiểu thêm</button>
                 </div>
                 <div class="course-card">
-                    <img src="assets/course_python.png" alt="Python Course">
+                    <img src="assets/img/course_python.png" alt="Python Course">
                     <h3>Lập Trình Python Từ A-Z</h3>
                     <p>Học Python để phát triển web, AI và phân tích dữ liệu.</p>
                     <div class="course-meta">
@@ -118,7 +120,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <h2 class="section-title">Bài Viết Mới Nhất</h2>
             <div class="blog-posts-container">
                 <div class="blog-post-card">
-                    <img src="assets/blog_post1.jpg" alt="Blog Post Image 1">
+                    <img src="assets/img/10-phuong-phap-tu-hoc-lap-trinh-vo-cung-hieu-qua" alt="Blog Post Image 1">
                     <div class="post-content">
                         <h3>10 Mẹo Để Học Lập Trình Hiệu Quả</h3>
                         <p class="post-meta"><i class="fas fa-calendar-alt"></i> 20/07/2025 | <i class="fas fa-tag"></i> Học tập</p>

@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập - Code hay</title>
-    <link rel="stylesheet" href="style.css"> <style>
+    <title>Đăng nhập - Code Hay</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
         /* Thêm CSS cho form đăng nhập */
         body {
             display: flex;
@@ -40,50 +41,46 @@
         .login-container label {
             display: block;
             margin-bottom: 8px;
+            color: var(--text-color);
             font-weight: 500;
-            color: var(--dark-gray);
         }
 
         .login-container input[type="text"],
+        .login-container input[type="email"],
         .login-container input[type="password"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid var(--medium-gray);
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             font-size: 1em;
-            color: var(--text-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .login-container input[type="text"]:focus,
-        .login-container input[type="password"]:focus {
-            border-color: var(--secondary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
+            box-sizing: border-box;
         }
 
         .login-container button {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--secondary-color);
-            border: none;
+            background-color: var(--primary-color);
             color: var(--white);
-            font-weight: 600;
+            padding: 12px 20px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
             font-size: 1.1em;
-            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .login-container button:hover {
-            background-color: #e65500;
+            background-color: var(--secondary-color);
         }
 
         .login-container .message {
             margin-top: 20px;
             color: red;
             font-weight: 500;
+        }
+        .login-container .success-message {
+            color: green;
         }
 
         .login-container p {
@@ -117,13 +114,15 @@
             </div>
             <button type="submit">Đăng nhập</button>
             <?php
-            // Đảm bảo PHP được mở và đóng đúng cách
             if (isset($_GET['error'])) {
                 echo '<p class="message">' . htmlspecialchars($_GET['error']) . '</p>';
+            } elseif (isset($_GET['message']) && isset($_GET['type']) && $_GET['type'] == 'success') {
+                echo '<p class="message success-message">' . htmlspecialchars($_GET['message']) . '</p>';
             }
             ?>
         </form>
-        <p>Chưa có tài khoản? <a href="register.php">Đăng ký ngay</a></p> </div>
+        <p>Chưa có tài khoản? <a href="register.php">Đăng ký ngay</a></p>
+    </div>
 </body>
 
 </html>

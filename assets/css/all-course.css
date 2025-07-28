@@ -17,8 +17,74 @@
   padding: 0;
 }
 
+#header {
+  width: 100%;
+  padding: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-light);
+}
+
+.logo {
+  display: block;
+  font-size: 1.8em; /* Kích thước chữ logo */
+  color: rgb(255, 102, 0);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 10px 0;
+}
+
+.logo span {
+  color: var(--secondary-color); /* Màu cho phần "hay" */
+}
+
+#menu {
+  list-style: none;
+  display: flex;
+}
+
+#menu .item {
+  margin: 0 20px;
+}
+
+#menu .item a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+#menu .item a:hover {
+  color: var(--secondary-color);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.actions .item {
+  margin-left: 20px;
+}
+
+.actions .item img {
+  width: 22px;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.actions .item img:hover {
+  transform: scale(1.15);
+}
+
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-dark);
   line-height: 1.6;

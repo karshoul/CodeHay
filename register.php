@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký - Code hay</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Đăng ký - Code Hay</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         /* CSS tương tự như login.html, có thể tái sử dụng hoặc điều chỉnh */
         body {
@@ -41,8 +41,8 @@
         .register-container label {
             display: block;
             margin-bottom: 8px;
+            color: var(--text-color);
             font-weight: 500;
-            color: var(--dark-gray);
         }
 
         .register-container input[type="text"],
@@ -50,41 +50,33 @@
         .register-container input[type="password"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid var(--medium-gray);
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             font-size: 1em;
-            color: var(--text-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .register-container input[type="text"]:focus,
-        .register-container input[type="email"]:focus,
-        .register-container input[type="password"]:focus {
-            border-color: var(--secondary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
+            box-sizing: border-box;
         }
 
         .register-container button {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--secondary-color);
-            border: none;
+            background-color: var(--primary-color);
             color: var(--white);
-            font-weight: 600;
+            padding: 12px 20px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
             font-size: 1.1em;
-            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .register-container button:hover {
-            background-color: #e65500;
+            background-color: var(--secondary-color);
         }
 
         .register-container .message {
             margin-top: 20px;
+            color: red;
             font-weight: 500;
         }
         .register-container .success-message {
@@ -133,7 +125,6 @@
             </div>
             <button type="submit">Đăng ký</button>
             <?php
-            // Hiển thị thông báo (nếu có)
             if (isset($_GET['message'])) {
                 $msg_type = (isset($_GET['type']) && $_GET['type'] == 'success') ? 'success-message' : 'error-message';
                 echo '<p class="message ' . $msg_type . '">' . htmlspecialchars($_GET['message']) . '</p>';

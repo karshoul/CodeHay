@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Các Khóa Học Nổi Bật | CodeCrafted</title>
+  <title>Các Khóa Học Nổi Bật</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="all-course.css" />
+  <link rel="stylesheet" href="assets/css/all-course.css" />
 
 </head>
 <body>
@@ -18,7 +17,7 @@
                 <span>CODE HAY</span>
             </a>
             <div id="menu">
-                <div class="item"><a href="#banner">Trang chủ</a></div>
+                <div class="item"><a href="index.php">Trang chủ</a></div>
                 <div class="item"><a href="#courses-section">Khoá học</a></div>
                 <div class="item"><a href="#blog-section">Blog</a></div>
                 <div class="item"><a href="#contact-section">Liên hệ</a></div>
@@ -62,7 +61,7 @@
 
         foreach ($courses as $c) {
           echo "<div class='course-card'>
-                  <img src='assets/$c[0]' alt='$c[1]'>
+                  <img src='assets/img/$c[0]' alt='$c[1]'>
                   <h3>$c[1]</h3>
                   <p>$c[2]</p>
                   <div class='course-meta'>
