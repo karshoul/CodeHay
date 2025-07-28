@@ -14,7 +14,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code hay</title>
+    <title>CODE HAY</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -23,7 +23,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="wrapper">
         <div id="header">
             <a href="#" class="logo">
-                <span>Code hay</span>
+                <span>CODE HAY</span>
             </a>
             <div id="menu">
                 <div class="item"><a href="#banner">Trang chủ</a></div>
@@ -38,8 +38,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                         <a href="logout.php" style="margin-left: 15px;">
-                            <img src="assets/logout
-                            .png" alt="Logout" style="width: 22px; height: auto;">
+                            <img src="assets/logout.png" alt="Logout" style="width: 22px; height: auto;">
                         </a>
                     <?php else: ?>
                         <a href="login.php" style="text-decoration: none;"> <img src="assets/user.png" alt="User" style="width: 22px; height: auto;">
@@ -99,7 +98,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button class="btn-primary">Tìm hiểu thêm</button>
                 </div>
                 <div class="course-card">
-                    <img src="assets/course_python.jpg" alt="Python Course">
+                    <img src="assets/course_python.png" alt="Python Course">
                     <h3>Lập Trình Python Từ A-Z</h3>
                     <p>Học Python để phát triển web, AI và phân tích dữ liệu.</p>
                     <div class="course-meta">
@@ -109,7 +108,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button class="btn-primary">Tìm hiểu thêm</button>
                 </div>
             </div>
-            <button class="btn-secondary">Xem tất cả khoá học</button>
+
+           <a href="all-courses-page1.php">
+           <button class="btn-secondary">Xem tất cả khoá học</button>
+           </a>
         </div>
 
         <div id="blog-section" class="section">
