@@ -30,6 +30,7 @@ if (isset($_GET['message'])) {
     <title>Thêm Khóa Học Mới</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
     <style>
         .add-course-container {
             max-width: 800px;
@@ -125,7 +126,39 @@ if (isset($_GET['message'])) {
 </head>
 <body>
     <div id="wrapper">
-        <?php include '../includes/header.php'; ?>
+        <header>
+            <div id="header">
+                <a href="../index.php" class="logo">
+                    <span>CODE HAY</span>
+                </a>
+                <div id="menu">
+                    <div class="item"><a href="../index.php">Trang chủ</a></div>
+                    <div class="item"><a href="../index.php#courses-section">Khoá học</a></div>
+                    <div class="item"><a href="../index.php#blog-section">Blog</a></div>
+                    <div class="item"><a href="../index.php#contact-section">Liên hệ</a></div>
+                </div>
+                <div class="actions">
+                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                        <div class="item dropdown">
+                            <a href="#" class="dropbtn" id="userDropdownBtn"> <i class="fas fa-user"></i>
+                                <span>Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                                <i class="fas fa-caret-down"></i>
+                            </a>
+                            <div class="dropdown-content" id="userDropdownContent">
+                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                    <a href="manage_courses.php"><i class="fas fa-cogs"></i> Quản lý Khóa học</a>
+                                <?php endif; ?>
+                                <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="item">
+                            <a href="../login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </header>
 
         <div class="add-course-container">
             <h2>Thêm Khóa Học Mới</h2>
@@ -151,10 +184,6 @@ if (isset($_GET['message'])) {
                     <label for="duration">Thời lượng (ví dụ: 60 giờ):</label>
                     <input type="text" id="duration" name="duration" placeholder="e.g., 60 giờ" required>
                 </div>
-                <div class="form-group">
-                    <label for="rating">Đánh giá (ví dụ: 4.9):</label>
-                    <input type="number" id="rating" name="rating" step="0.1" min="0" max="5" required>
-                </div>
                 <button type="submit">Thêm Khóa Học</button>
                 <a href="manage_courses.php" class="btn btn-secondary back-button-add-course" style="margin-top: 15px; display: inline-block;">Quay lại Quản lý Khóa học</a>
             </form>
@@ -162,5 +191,28 @@ if (isset($_GET['message'])) {
 
         <?php include '../includes/footer.php'; ?>
     </div>
+    <script>
+    // JavaScript để xử lý dropdown menu (nếu bạn có)
+    document.addEventListener('DOMContentLoaded', function() {
+        var userDropdownBtn = document.getElementById('userDropdownBtn');
+        var userDropdownContent = document.getElementById('userDropdownContent');
+
+        if (userDropdownBtn && userDropdownContent) {
+            userDropdownBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a
+                userDropdownContent.classList.toggle('show');
+            });
+
+            // Đóng dropdown nếu click bên ngoài
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropbtn') && !event.target.closest('.dropdown')) {
+                    if (userDropdownContent.classList.contains('show')) {
+                        userDropdownContent.classList.remove('show');
+                    }
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>

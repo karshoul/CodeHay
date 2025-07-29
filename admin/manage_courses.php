@@ -3,21 +3,19 @@ session_start();
 require_once '../includes/db_connect.php'; // Đảm bảo đường dẫn này đã đúng
 
 // Kiểm tra xem người dùng đã đăng nhập chưa và có vai trò admin không
-// Đây là phần quan trọng để bảo mật trang quản lý
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../login.php"); // Chuyển hướng về trang đăng nhập
     exit();
 }
-// Giả định bạn có cột 'role' trong bảng 'users' và 'admin' là vai trò quản trị
-// Nếu bạn chưa có cột này, hãy xem xét thêm nó vào để tăng cường bảo mật
-// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-//     header("Location: ../index.php"); // Hoặc trang báo lỗi quyền truy cập
-//     exit();
-// }
+// Kích hoạt kiểm tra vai trò admin - RẤT QUAN TRỌNG CHO BẢO MẬT
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../index.php"); // Hoặc trang báo lỗi quyền truy cập
+    exit();
+}
 
 
-// Lấy tất cả khóa học
-$sql = "SELECT id, title, description, image, duration, rating FROM courses ORDER BY id ASC";
+// Lấy tất cả khóa học (Đã bỏ cột 'rating')
+$sql = "SELECT id, title, description, image, duration FROM courses ORDER BY id ASC";
 $result = $conn->query($sql);
 
 $message = '';
@@ -40,6 +38,7 @@ if (isset($_GET['status'])) {
     <title>Quản Lý Khóa Học | CODE HAY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/header.css">
     <style>
         /* CSS cho layout quản lý dạng bảng */
         #all-courses-content {
@@ -212,15 +211,44 @@ if (isset($_GET['status'])) {
 
 <body>
     <div id="wrapper">
-        <?php include '../includes/header.php'; // Điều chỉnh đường dẫn header ?>
-
+        <header>
+            <div id="header">
+                <a href="../index.php" class="logo"> <span>CODE HAY</span>
+                </a>
+                <div id="menu">
+                    <div class="item"><a href="../index.php">Trang chủ</a></div>
+                    <div class="item"><a href="../index.php#courses-section">Khoá học</a></div>
+                    <div class="item"><a href="../index.php#blog-section">Blog</a></div>
+                    <div class="item"><a href="../index.php#contact-section">Liên hệ</a></div>
+                </div>
+                <div class="actions">
+                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                        <div class="item dropdown">
+                            <a href="#" class="dropbtn" id="userDropdownBtn"> <i class="fas fa-user"></i>
+                                <span>Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                                <i class="fas fa-caret-down"></i>
+                            </a>
+                            <div class="dropdown-content" id="userDropdownContent">
+                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <?php endif; ?>
+                                <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="item">
+                            <a href="../login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </header>
         <div id="all-courses-content">
             <h2 class="section-title">Quản Lý Khóa Học</h2>
             <div class="add-course-btn-container">
                 <a href="add_course.php" class="add-course-btn"><i class="fas fa-plus-circle"></i> Thêm Khoá Học Mới</a>
             </div>
             <?php echo $message; // Hiển thị thông báo ?>
-            
+
             <?php if ($result && $result->num_rows > 0): ?>
                 <table class="course-management-table">
                     <thead>
@@ -230,7 +258,6 @@ if (isset($_GET['status'])) {
                             <th>Tiêu đề</th>
                             <th>Mô tả</th>
                             <th>Thời lượng</th>
-                            <th>Đánh giá</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -243,7 +270,6 @@ if (isset($_GET['status'])) {
                                 <td data-label="Tiêu đề"><?php echo htmlspecialchars($course['title']); ?></td>
                                 <td data-label="Mô tả"><?php echo nl2br(htmlspecialchars(mb_strimwidth($course['description'], 0, 100, "..."))); // Cắt bớt mô tả nếu quá dài ?></td>
                                 <td data-label="Thời lượng"><?php echo htmlspecialchars($course['duration']); ?> giờ</td>
-                                <td data-label="Đánh giá"><?php echo htmlspecialchars($course['rating']); ?></td>
                                 <td data-label="Hành động" class="actions">
                                     <a href="edit_course.php?id=<?php echo $course['id']; ?>" class="edit-btn"><i class="fas fa-edit"></i> Sửa</a>
                                     <a href="delete_course.php?id=<?php echo $course['id']; ?>" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa khóa học này không?');"><i class="fas fa-trash-alt"></i> Xóa</a>
@@ -257,8 +283,62 @@ if (isset($_GET['status'])) {
             <?php endif; ?>
         </div>
 
-        <?php include '../includes/footer.php'; // Điều chỉnh đường dẫn footer ?>
-    </div>
+        <div id="footer">
+            <div class="footer-content">
+                <div class="footer-column about-us">
+                    <h3>Về Code Hay</h3>
+                    <p>Chúng tôi cung cấp các khóa học lập trình chất lượng, giúp bạn dễ dàng tiếp cận và làm chủ thế giới công nghệ.</p>
+                    <div class="social-media">
+                        <h3>Theo dõi chúng tôi</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column quick-links">
+                    <h3>Liên kết nhanh</h3>
+                    <ul>
+                        <li><a href="../index.php#banner">Trang chủ</a></li> <li><a href="../index.php#courses-section">Khoá học</a></li> <li><a href="../index.php#blog-section">Blog</a></li> <li><a href="../index.php#contact-section">Liên hệ</a></li> <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column contact-info-footer">
+                    <h3>Thông tin liên hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 132 Nguyễn Đệ, Bình Thuỷ, TP Cần Thơ</p>
+                    <p><i class="fas fa-phone"></i> +84 798 059 074</p>
+                    <p><i class="fas fa-envelope"></i> hotro@codehay.vn</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <?php echo date("Y"); ?> Code Hay. All rights reserved.</p>
+            </div>
+        </div>
+        </div>
+    <script>
+    // JavaScript để xử lý dropdown menu (nếu bạn có)
+    document.addEventListener('DOMContentLoaded', function() {
+        var userDropdownBtn = document.getElementById('userDropdownBtn');
+        var userDropdownContent = document.getElementById('userDropdownContent');
+
+        if (userDropdownBtn && userDropdownContent) {
+            userDropdownBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a
+                userDropdownContent.classList.toggle('show');
+            });
+
+            // Đóng dropdown nếu click bên ngoài
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropbtn') && !event.target.closest('.dropdown')) {
+                    if (userDropdownContent.classList.contains('show')) {
+                        userDropdownContent.classList.remove('show');
+                    }
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
 <?php $conn->close(); ?>

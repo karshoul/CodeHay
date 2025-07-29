@@ -18,22 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
     $duration = trim($_POST['duration']);
-    $rating = floatval($_POST['rating']);
+    // Đã bỏ biến $rating
 
     $image_name = null;
 
-    // Validate inputs
-    if (empty($title) || empty($description) || empty($duration) || empty($rating)) {
+    // Validate inputs (đã bỏ kiểm tra $rating)
+    if (empty($title) || empty($description) || empty($duration)) {
         header("Location: add_course.php?message=Vui lòng điền đầy đủ tất cả các trường.&type=error");
         exit();
     }
 
-    if ($rating < 0 || $rating > 5) {
-        header("Location: add_course.php?message=Đánh giá phải từ 0 đến 5.&type=error");
-        exit();
-    }
+    // Đã bỏ kiểm tra rating < 0 hoặc rating > 5
 
-    // Handle image upload
+    // Xử lí ảnh
     if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
         $target_dir = "../assets/img/"; // Thư mục lưu ảnh, điều chỉnh đường dẫn nếu cần
         $image_file_type = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
@@ -58,10 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Insert course into database
-    $stmt = $conn->prepare("INSERT INTO courses (title, description, image, duration, rating) VALUES (?, ?, ?, ?, ?)");
+    // Insert course into database (đã bỏ cột rating)
+    $stmt = $conn->prepare("INSERT INTO courses (title, description, image, duration) VALUES (?, ?, ?, ?)");
     if ($stmt) {
-        $stmt->bind_param("sssis", $title, $description, $image_name, $duration, $rating);
+        // Đã bỏ tham số $rating
+        $stmt->bind_param("ssss", $title, $description, $image_name, $duration);
 
         if ($stmt->execute()) {
             header("Location: add_course.php?message=Thêm khóa học thành công!&type=success");

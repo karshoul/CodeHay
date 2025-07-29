@@ -127,8 +127,6 @@ $conn->close();
                 <a href="index.php" class="btn-primary">Về trang chủ</a>
             </div>
         </div>
-
-        <?php include 'includes/footer.php'; ?>
     </div>
 </body>
 </html>

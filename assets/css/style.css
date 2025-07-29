@@ -109,17 +109,26 @@ body {
 
 /* HEADER */
 #header {
-  width: 100%;
-  padding: 10px 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--white);
-  position: sticky;
+  padding: 10px 5%;
+  background-color: var(--primary-color);
+  color: var(--white);
+  position: fixed; /* Đây là thuộc tính quan trọng giúp header cố định */
   top: 0;
-  z-index: 1000;
-  box-shadow: var(--shadow-light);
+  left: 0;
+  width: 100%;
+  box-shadow: var(--shadow-small);
+  z-index: 1000; /* Đảm bảo header nằm trên các nội dung khác */
 }
+
+#banner, #courses-section, #blog-section, .about-section, .contact-section,
+.course-detail-section, .blog-detail-section, .login-container, .register-container, .profile-container {
+    margin-top: 70px; /* Điều chỉnh giá trị này để phù hợp với CHIỀU CAO THỰC TẾ của header */
+}
+
+
 
 .logo {
   display: block;
@@ -238,85 +247,125 @@ body {
 }
 
 
-/* COURSES SECTION STYLES */
+/* COURSES SECTION STYLES (Đã sửa ở bước trước) */
 #courses-section {
   background-color: var(--white);
   padding-top: 80px;
   padding-bottom: 80px;
 }
 
-.courses-container {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(280px, 1fr)
-  ); /* Responsive grid */
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto 40px; /* Center container and add bottom margin */
+#courses-section .course-list {
+    display: flex; /* Sử dụng Flexbox để xếp các thẻ ngang hàng */
+    flex-wrap: wrap; /* Cho phép các thẻ xuống dòng nếu không đủ chỗ */
+    justify-content: center; /* Căn giữa các thẻ trong hàng */
+    gap: 20px; /* Tạo khoảng cách giữa các thẻ (ngang và dọc) */
+    margin-top: 30px;
+    max-width: 1200px; /* Giới hạn chiều rộng container */
+    margin-left: auto; /* Căn giữa container */
+    margin-right: auto; /* Căn giữa container */
+    margin-bottom: 40px; /* Khoảng cách dưới cùng của container */
 }
 
-.course-card {
-  background-color: var(--white);
-  border-radius: 10px;
-  box-shadow: var(--shadow-light);
-  overflow: hidden;
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
+#courses-section .course-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-small); /* Một bóng đổ nhẹ nhàng */
+    overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài bo tròn */
+    text-align: center;
+    padding-bottom: 20px; /* Khoảng cách dưới cùng của card */
+    width: calc(25% - 20px); /* 4 cột trên màn hình lớn, trừ đi gap */
+    min-width: 280px; /* Đảm bảo thẻ không quá nhỏ */
+    max-width: 320px; /* Giới hạn kích thước tối đa của thẻ */
+    display: flex; /* Sử dụng flexbox cho nội dung card */
+    flex-direction: column; /* Xếp nội dung card theo chiều dọc */
+    justify-content: space-between; /* Đẩy nội dung lên trên, nút xuống dưới */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng hover */
 }
 
-.course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-medium);
+#courses-section .course-card:hover {
+    transform: translateY(-5px); /* Hiệu ứng nhấc nhẹ lên khi hover */
+    box-shadow: var(--shadow-medium); /* Bóng đổ đậm hơn khi hover */
 }
 
-.course-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
+#courses-section .course-card img {
+    width: 100%;
+    height: 180px; /* Chiều cao cố định cho ảnh */
+    object-fit: cover; /* Đảm bảo ảnh đầy đủ khung mà không bị méo */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 15px;
 }
 
-.course-card h3 {
-  font-size: 1.3em;
-  color: var(--primary-color);
-  margin: 15px 15px 10px;
+#courses-section .course-card h3 {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    padding: 0 15px; /* Đệm ngang cho tiêu đề */
 }
 
-.course-card p {
-  font-size: 0.95em;
-  color: var(--dark-gray);
-  padding: 0 15px;
-  margin-bottom: 15px;
-  flex-grow: 1; /* Make paragraph take available space */
+#courses-section .course-card p {
+    font-size: 0.95em;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Cho phép đoạn văn bản chiếm hết không gian còn lại */
+    padding: 0 15px; /* Đệm ngang cho mô tả */
 }
 
-.course-card .course-meta {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: var(--light-gray);
-  padding: 10px 15px;
-  margin-top: 10px;
-  font-size: 0.85em;
-  color: var(--dark-gray);
-  border-top: 1px solid var(--medium-gray);
+#courses-section .course-card .course-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9em;
+    color: var(--dark-gray);
+    margin-bottom: 20px;
+    padding: 0 15px; /* Đệm ngang cho meta */
 }
 
-.course-card .course-meta span i {
-  color: var(--secondary-color);
-  margin-right: 5px;
+#courses-section .course-card .course-meta span i {
+    color: var(--secondary-color);
+    margin-right: 5px;
 }
 
-.course-card .btn-primary {
-  width: calc(100% - 30px); /* Adjust width for padding */
-  margin: 15px; /* Consistent margin */
-  text-align: center;
+#courses-section .course-card .btn-primary {
+    display: inline-block;
+    background-color: var(--primary-color); /* Màu chính cho nút */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-top: auto; /* Đẩy nút xuống cuối card */
+    width: auto; /* Chiều rộng tự động theo nội dung */
 }
 
-/* BLOG SECTION STYLES */
+#courses-section .course-card .btn-primary:hover {
+    background-color: var(--secondary-color); /* Màu phụ khi hover */
+}
+
+/* Responsive adjustments for course cards */
+@media (max-width: 1200px) {
+    #courses-section .course-card {
+        width: calc(33.33% - 20px); /* 3 cột trên màn hình vừa */
+    }
+}
+
+@media (max-width: 768px) {
+    #courses-section .course-card {
+        width: calc(50% - 20px); /* 2 cột trên tablet */
+    }
+}
+
+@media (max-width: 480px) {
+    #courses-section .course-card {
+        width: 90%; /* 1 cột trên điện thoại nhỏ */
+        min-width: 250px;
+    }
+}
+
+
+/* BLOG SECTION STYLES (Đã Cập Nhật Lại) */
 #blog-section {
   background-color: var(--light-gray);
   padding-top: 80px;
@@ -325,10 +374,12 @@ body {
 
 .blog-posts-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto 40px;
+  /* Sử dụng 3 cột bằng nhau trên màn hình lớn */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; /* Khoảng cách giữa các bài viết */
+  max-width: 1200px; /* Giới hạn chiều rộng tổng thể của container */
+  margin: 0 auto 40px; /* Căn giữa container và tạo khoảng cách dưới */
+  padding: 0 15px; /* Thêm padding ngang để không dính sát viền màn hình trên thiết bị nhỏ */
 }
 
 .blog-post-card {
@@ -405,6 +456,22 @@ body {
 .blog-post-card .read-more:hover i {
   margin-left: 10px;
 }
+
+/* Responsive adjustments for blog posts */
+@media (max-width: 992px) {
+  .blog-posts-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên màn hình vừa */
+    gap: 20px; /* Giảm khoảng cách */
+  }
+}
+
+@media (max-width: 600px) { /* Trên điện thoại */
+    .blog-posts-container {
+        grid-template-columns: 1fr; /* 1 cột duy nhất */
+        padding: 0 20px; /* Thêm padding 2 bên để nội dung không bị sát rìa */
+    }
+}
+
 
 /* CONTACT SECTION STYLES */
 #contact-section {
@@ -656,12 +723,9 @@ body {
     font-size: 1.8em;
   }
 
-  .courses-container,
+  /* Responsive adjustments for blog posts - move specific rules here */
   .blog-posts-container {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(250px, 1fr)
-    ); /* Adjust for smaller screens */
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên màn hình vừa */
     gap: 20px;
   }
 
@@ -741,6 +805,111 @@ body {
     margin-bottom: 30px;
   }
 
+  /* --- CSS cho nội dung trang Giới thiệu (about.php) --- */
+
+.about-section {
+  padding: 80px 0;
+  background-color: var(--light-gray); /* Đảm bảo bạn đã định nghĩa biến --light-gray trong :root */
+  text-align: center;
+}
+
+.about-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.about-container h2 {
+  font-size: 2.8em;
+  color: var(--primary-color); /* Đảm bảo bạn đã định nghĩa biến --primary-color */
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.about-container h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--secondary-color); /* Đảm bảo bạn đã định nghĩa biến --secondary-color */
+  border-radius: 2px;
+}
+
+.about-container p {
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--dark-gray); /* Đảm bảo bạn đã định nghĩa biến --dark-gray */
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.about-container .highlight {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.about-container .vision-mission {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  gap: 20px;
+}
+
+.about-container .vision-mission .box {
+  background-color: var(--white); /* Đảm bảo bạn đã định nghĩa biến --white */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-small); /* Đảm bảo bạn đã định nghĩa biến --shadow-small */
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-container .vision-mission .box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium); /* Đảm bảo bạn đã định nghĩa biến --shadow-medium */
+}
+
+.about-container .vision-mission .box h3 {
+  font-size: 1.8em;
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--light-gray);
+  padding-bottom: 10px;
+}
+
+.about-container .vision-mission .box p {
+  font-size: 1em;
+  color: var(--text-color); /* Đảm bảo bạn đã định nghĩa biến --text-color */
+  text-align: left;
+}
+
+/* Responsive cho trang giới thiệu */
+@media (max-width: 768px) {
+  .about-container h2 {
+      font-size: 2em;
+  }
+  .about-container p {
+      font-size: 1em;
+  }
+  .about-container .vision-mission .box {
+      min-width: unset;
+      width: 100%;
+  }
+}
+
+/* --- Điều chỉnh vị trí nội dung chính do header cố định --- */
+/* Đảm bảo các phần nội dung chính không bị header che khuất */
+#banner, #courses-section, #blog-section, .about-section, .contact-section {
+  margin-top: 70px; /* Điều chỉnh giá trị này để phù hợp với chiều cao thực tế của header của bạn */
+}
+
   /* Footer responsive đã được điều chỉnh trong media query 992px */
   .footer-section .newsletter .text-input {
     width: 80%;
@@ -750,4 +919,12 @@ body {
   .footer-section .newsletter .btn-subscribe {
     width: 80%;
   }
+}
+
+/* New breakpoint for very small screens for blog posts */
+@media (max-width: 600px) {
+    .blog-posts-container {
+        grid-template-columns: 1fr; /* 1 cột duy nhất trên màn hình rất nhỏ */
+        padding: 0 20px; /* Thêm padding 2 bên để nội dung không bị sát rìa */
+    }
 }

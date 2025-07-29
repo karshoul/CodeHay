@@ -145,7 +145,6 @@ $conn->close();
 </head>
 <body>
     <div id="wrapper">
-        <?php include 'includes/header.php'; ?>
 
         <div class="course-detail-container">
             <?php if ($course): ?>
@@ -155,7 +154,6 @@ $conn->close();
                     <div class="course-info-block">
                         <div class="course-meta-detail">
                             <span><i class="fas fa-clock"></i> Thời lượng: <?php echo htmlspecialchars($course['duration']); ?> giờ</span>
-                            <span><i class="fas fa-star"></i> Đánh giá: <?php echo htmlspecialchars($course['rating']); ?>/5.0</span>
                             <span><i class="fas fa-calendar-alt"></i> Cập nhật: <?php echo date("d/m/Y", strtotime($course['created_at'])); ?></span>
                         </div>
                         <h3>Mô tả khóa học:</h3>
@@ -175,8 +173,6 @@ $conn->close();
                 </div>
             <?php endif; ?>
         </div>
-
-        <?php include 'includes/footer.php'; ?>
     </div>
 </body>
 </html>

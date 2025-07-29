@@ -99,7 +99,6 @@ require_once("../includes/db_connect.php");
 </head>
 <body>
 
-  <?php include '../includes/header.php'; ?>
   <header class="admin-header">
     <h1>Bảng điều khiển Quản trị viên</h1>
     <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>

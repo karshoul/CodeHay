@@ -2,6 +2,9 @@
 ob_start();
 session_start();
 require_once 'includes/db_connect.php'; // Kết nối CSDL
+header('Content-Type: application/json'); // Trả về JSON
+
+$response = ["success" => false, "message" => "Lỗi không xác định"];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username']);
@@ -16,20 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($result_admin && $result_admin->num_rows === 1) {
         $admin = $result_admin->fetch_assoc();
-        if ($password === $admin['password']) { // Nếu bạn lưu password thuần
-        // Hoặc dùng password_verify($password, $admin['password']) nếu password đã mã hóa
+        if ($password === $admin['password']) { // Hoặc password_verify nếu có mã hóa
             $_SESSION['loggedin'] = true;
             $_SESSION['user_id'] = $admin['id'];
             $_SESSION['username'] = $admin['username'];
             $_SESSION['role'] = 'admin';
 
-            echo "Login thành công. Đang chuyển trang...";
-            header("Refresh: 2; URL=admin/admin_dashboard.php");
+            $response = ["success" => true, "redirect" => "admin/admin_dashboard.php"];
+            echo json_encode($response);
             exit();
         }
     }
 
-    // ==== 2. Nếu không phải admin, kiểm tra trong bảng users ====
+    // ==== 2. Kiểm tra user ====
     $sql_user = "SELECT id, username, password FROM users WHERE username = ? OR email = ?";
     $stmt_user = $conn->prepare($sql_user);
     $stmt_user->bind_param("ss", $username, $username);
@@ -44,16 +46,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = 'user';
 
-            header("Location: index.php");
+            $response = ["success" => true, "redirect" => "index.php"];
+            echo json_encode($response);
             exit();
         }
     }
 
-    // ==== 3. Nếu không đúng tài khoản nào ====
-    $_SESSION['login_error'] = "Tên đăng nhập hoặc mật khẩu không đúng.";
-    header("Location: login.php");
+    // Sai tài khoản hoặc mật khẩu
+    $response = ["success" => false, "message" => "Tên đăng nhập hoặc mật khẩu không đúng"];
+    echo json_encode($response);
     exit();
 } else {
-    header("Location: login.php");
+    $response = ["success" => false, "message" => "Phương thức không hợp lệ"];
+    echo json_encode($response);
     exit();
 }

@@ -1,82 +1,179 @@
-/* all-blog.css */
+/* assets/css/all-blogs.css */
 
-/* Bao bọc toàn bộ nội dung blog nếu cần padding riêng */
+/* Đảm bảo rằng các biến CSS này được định nghĩa ở đâu đó, 
+   ví dụ trong file assets/css/style.css hoặc trong :root của một file CSS chung */
+/* Ví dụ:
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --white: #fff;
+    --dark-gray: #333;
+    --light-gray: #f4f4f4;
+    --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+*/
+
+#header {
+    /* Các style hiện có của bạn */
+    background-color: #ffffff; /* Màu nền cho header */
+    padding: 15px 0; /* Khoảng đệm trên dưới cho header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ cho header */
+    width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng */
+
+    /* Bắt buộc để làm cho header cố định */
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+}
+
+/* Các style khác trong file all-blogs.css của bạn */
+
+/* Style cho dropdown menu và nút đăng nhập/xuất */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    right: 0; 
+    top: 100%; 
+    margin-top: 5px; 
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    white-space: nowrap; 
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropbtn {
+    background-color: transparent;
+    color: #333;
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+}
+
+.dropbtn i {
+    margin-right: 8px; 
+}
+
+.dropbtn .fas.fa-caret-down {
+    margin-left: 8px; 
+    margin-right: 0; 
+}
+
+.login-btn {
+    background-color: var(--primary-color); 
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-flex; 
+    align-items: center; 
+}
+
+.login-btn i {
+    margin-right: 8px; 
+}
+
+.login-btn:hover {
+    background-color: var(--secondary-color); 
+}
+
+/* Wrapper để chứa toàn bộ nội dung, giúp căn giữa tổng thể nếu cần */
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Điều chỉnh phần content chính để có khoảng đệm và đẩy footer xuống */
 #all-blogs-content {
-    padding: 50px 5%; /* Điều chỉnh padding cho nội dung blog */
-    max-width: 1200px;
-    margin: 50px auto;
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: var(--shadow-medium);
+    flex: 1; /* Cho phép nội dung chính mở rộng để đẩy footer xuống */
+    padding: 20px; /* Thêm khoảng đệm xung quanh nội dung */
+    margin-top: 80px; /* Đảm bảo nội dung không bị che bởi header sticky */
 }
 
 .section-title {
-    text-align: center;
-    font-size: 2.5em;
-    color: var(--primary-color);
-    margin-bottom: 50px;
-    position: relative;
-    padding-bottom: 15px;
+    font-size: 2.5em; /* Kích thước chữ lớn hơn cho tiêu đề */
+    color: #333;
+    margin-bottom: 40px; /* Khoảng cách dưới tiêu đề */
+    text-align: center; /* Căn giữa tiêu đề "Bài viết nổi bật" */
+    font-weight: 700;
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background-color: var(--secondary-color);
-    border-radius: 2px;
-}
-
-
-/* Blog Grid Layout */
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 cột trên màn hình lớn, tự động điều chỉnh */
-    gap: 30px; /* Khoảng cách giữa các card */
-    margin-bottom: 50px;
+    /* Sử dụng repeat và auto-fit để tạo lưới 3 cột trên màn hình lớn,
+       và tự động điều chỉnh số cột trên màn hình nhỏ */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Khoảng cách giữa các blog card */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa của lưới blog */
+    margin: 0 auto; /* Căn giữa lưới blog trên trang */
+    padding: 0 20px; /* Khoảng đệm ngang cho lưới trên các màn hình nhỏ hơn max-width */
 }
 
-/* Blog Card Styles */
 .blog-card {
-    background-color: var(--white);
-    border-radius: 10px;
-    box-shadow: var(--shadow-light); /* Bóng đổ nhẹ nhàng */
-    overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài card bo tròn */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     display: flex;
-    flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
-    height: 100%; /* Đảm bảo các card có chiều cao bằng nhau trong grid */
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Thêm transition cho box-shadow */
 }
 
 .blog-card:hover {
-    transform: translateY(-8px); /* Hiệu ứng nổi lên khi hover */
-    box-shadow: var(--shadow-hover); /* Bóng đổ mạnh hơn khi hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Tăng độ sâu bóng khi hover */
 }
 
 .blog-card img {
     width: 100%;
-    height: 200px; /* Chiều cao cố định cho ảnh thumbnail */
-    object-fit: cover; /* Đảm bảo ảnh được cover mà không bị méo */
-    border-bottom: 1px solid var(--light-gray); /* Đường kẻ dưới ảnh */
+    height: 200px; /* Chiều cao cố định cho tất cả hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị méo */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: block;
 }
 
-.blog-card .blog-info {
+.blog-info {
     padding: 20px;
+    flex-grow: 1; /* Đảm bảo phần này chiếm hết không gian còn lại */
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Cho phép nội dung co giãn lấp đầy không gian */
+    justify-content: space-between; /* Đẩy "Đọc thêm" xuống cuối */
 }
 
-.blog-card h3 {
-    font-size: 1.4em;
-    color: var(--primary-color);
-    margin-top: 0;
-    margin-bottom: 15px;
-    min-height: 2.8em; /* Đảm bảo tiêu đề có đủ không gian cho 2 dòng */
+.blog-info h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+    /* Đảm bảo tiêu đề không bị quá dài gây lệch bố cục */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -84,161 +181,198 @@
     -webkit-box-orient: vertical;
 }
 
-.blog-card .blog-meta {
-    font-size: 0.9em;
-    color: var(--dark-gray);
-    margin-bottom: 15px;
+.blog-info .blog-meta {
     display: flex;
-    flex-wrap: wrap; /* Cho phép các mục meta xuống dòng */
-    gap: 15px; /* Khoảng cách giữa các mục meta */
+    justify-content: space-between;
+    align-items: center;
+    color: #777;
+    margin-bottom: 15px;
+    font-size: 0.9em;
 }
 
-.blog-card .blog-meta i {
-    color: var(--secondary-color);
+.blog-info .blog-meta span {
+    display: flex;
+    align-items: center;
+}
+
+.blog-info .blog-meta i {
     margin-right: 5px;
+    color: #555;
 }
 
-.blog-card p {
-    font-size: 1em;
-    color: var(--text-color);
+.blog-info p {
     line-height: 1.6;
-    margin-bottom: 20px;
-    flex-grow: 1; /* Đẩy nút "Đọc thêm" xuống dưới cùng */
+    color: #555;
+    margin-bottom: 15px;
+    /* Đảm bảo nội dung mô tả không quá dài gây lệch */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Giới hạn 3 dòng cho mô tả */
+    -webkit-line-clamp: 3; /* Giới hạn 3 dòng cho đoạn mô tả */
     -webkit-box-orient: vertical;
 }
 
-.blog-card .read-more {
-    display: inline-flex; /* Để icon và text trên cùng 1 hàng và căn giữa icon */
-    align-items: center;
-    color: var(--primary-color);
+.blog-info .read-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    margin-top: auto; /* Đẩy nút xuống cuối card */
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* Căn nút "Đọc thêm" về phía trái */
 }
 
-.blog-card .read-more:hover {
-    color: var(--secondary-color);
+.blog-info .read-more:hover {
+    background-color: var(--secondary-color);
 }
 
-.blog-card .read-more i {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-}
-
-.blog-card .read-more:hover i {
-    transform: translateX(5px);
-}
-
-/* Pagination Styles */
+/* Pagination styles */
 .pagination {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 40px;
-    gap: 10px; /* Khoảng cách giữa các số trang */
+    margin-bottom: 40px; /* Thêm khoảng cách ở dưới pagination */
 }
 
 .pagination a {
-    display: inline-flex; /* Sử dụng flex để căn giữa số trang hoặc mũi tên */
-    align-items: center;
-    justify-content: center;
-    min-width: 40px; /* Chiều rộng tối thiểu cho số trang */
-    height: 40px; /* Chiều cao cố định */
-    padding: 0 10px; /* Padding cho các nút trang trước/sau */
-    background-color: var(--light-gray);
-    color: var(--primary-color);
     text-decoration: none;
+    color: var(--primary-color);
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    box-shadow: var(--shadow-light); /* Thêm bóng nhẹ cho nút */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination a:hover {
-    background-color: var(--secondary-color);
-    color: var(--white);
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .pagination a.active {
     background-color: var(--primary-color);
-    color: var(--white);
-    pointer-events: none; /* Vô hiệu hóa click vào trang hiện tại */
-    box-shadow: var(--shadow-medium);
+    color: white;
+    font-weight: bold;
 }
 
 .pagination-arrow {
-    padding: 0 15px; /* Padding riêng cho nút mũi tên */
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1em;
 }
 
-/* No blogs found message */
-.no-blogs-found {
-    text-align: center;
-    font-size: 1.2em;
-    color: var(--dark-gray);
-    margin: 50px 0;
+.pagination-arrow:hover {
+    color: var(--secondary-color);
+    background-color: transparent; /* Đảm bảo không có nền khi hover */
 }
 
-/* Responsive adjustments */
+/* Style cho nút "Quay lại" được cải thiện */
+.back-button-container {
+    text-align: left;
+    margin-bottom: 30px; /* Tăng khoảng cách dưới một chút cho đẹp mắt hơn */
+    margin-top: 20px; /* Thêm khoảng cách trên nếu cần thiết, tùy thuộc vào bố cục tổng thể */
+    max-width: 1200px; /* Giữ cùng chiều rộng với blog-grid để căn chỉnh */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px; /* Khoảng đệm ngang giống blog-grid */
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa nội dung (icon và text) nếu có khoảng trống */
+    background-color: var(--light-gray); /* Sử dụng biến màu nếu có, hoặc màu xám nhạt */
+    color: var(--dark-gray); /* Màu chữ tối */
+    padding: 12px 25px; /* Tăng padding để nút lớn hơn và dễ bấm hơn */
+    border-radius: 8px; /* Bo góc mềm mại hơn */
+    text-decoration: none;
+    font-weight: 600; /* Chữ đậm vừa phải */
+    font-size: 1.05em; /* Kích thước chữ lớn hơn một chút */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    border: 1px solid #ccc; /* Thêm viền nhẹ */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Thêm bóng nhẹ */
+}
+
+.back-button i {
+    margin-right: 10px; /* Tăng khoảng cách giữa icon và text */
+    font-size: 1.1em; /* Kích thước icon lớn hơn một chút */
+}
+
+.back-button:hover {
+    background-color: var(--primary-color); /* Màu nền khi hover (màu chủ đạo của bạn) */
+    color: var(--white); /* Chữ trắng khi hover */
+    border-color: var(--primary-color); /* Viền cùng màu chủ đạo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Bóng đổ mạnh hơn khi hover */
+    transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ lên khi hover */
+}
+
+.back-button:active {
+    transform: translateY(0); /* Nút "ấn xuống" khi click */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Đảm bảo responsive cho nút quay lại vẫn hoạt động tốt */
+@media (max-width: 768px) {
+    .back-button-container {
+        padding: 0 15px; /* Giảm padding trên mobile */
+        margin-bottom: 20px;
+        margin-top: 15px;
+    }
+    .back-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    .back-button i {
+        margin-right: 8px;
+        font-size: 1em;
+    }
+}
+
+/* Media Queries cho Responsive Design */
 @media (max-width: 992px) {
     .blog-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2-3 cột trên tablet */
-        gap: 25px;
-    }
-    #all-blogs-content {
-        padding: 30px 3%;
-    }
-    .section-title {
-        font-size: 2em;
-        margin-bottom: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Điều chỉnh cho tablet */
+        gap: 20px;
     }
 }
 
 @media (max-width: 768px) {
     .blog-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2 cột trên điện thoại lớn */
+        grid-template-columns: 1fr; /* Một cột duy nhất trên điện thoại */
         gap: 20px;
+        padding: 0 15px;
     }
-    .blog-card h3 {
-        font-size: 1.3em;
+    .section-title {
+        font-size: 2em;
+        margin-bottom: 30px;
     }
-    .pagination {
-        flex-wrap: wrap; /* Cho phép phân trang xuống dòng */
-        gap: 8px;
-    }
-    .pagination a {
-        min-width: 36px;
-        height: 36px;
-        font-size: 0.9em;
-    }
-    .pagination-arrow {
-        padding: 0 10px;
+    #all-blogs-content {
+        padding: 15px;
+        margin-top: 70px;
     }
 }
 
-@media (max-width: 576px) {
-    .blog-grid {
-        grid-template-columns: 1fr; /* 1 cột trên điện thoại nhỏ */
-        gap: 20px;
-    }
+@media (max-width: 480px) {
     .blog-card img {
         height: 180px;
     }
-    #all-blogs-content {
-        padding: 20px 2%;
-        margin: 30px auto;
+    .blog-info h3 {
+        font-size: 1.3em;
     }
-    .section-title {
-        font-size: 1.8em;
-        margin-bottom: 30px;
-    }
-    .blog-card h3 {
-        font-size: 1.2em;
-    }
-    .blog-card p {
+    .blog-info p {
         font-size: 0.9em;
     }
-}   
+    .blog-info .read-more {
+        padding: 8px 15px;
+    }
+    .pagination a {
+        padding: 8px 12px;
+        margin: 0 3px;
+        font-size: 0.9em;
+    }
+}
