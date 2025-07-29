@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-require_once './includes/db_connect.php'; // Kết nối CSDL
+require_once 'includes/db_connect.php'; // Kết nối CSDL
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username']);
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['role'] = 'admin';
 
             echo "Login thành công. Đang chuyển trang...";
-            header("Refresh: 2; URL=admin_dashboard.php");
+            header("Refresh: 2; URL=admin/admin_dashboard.php");
             exit();
         }
     }

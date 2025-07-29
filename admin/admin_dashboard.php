@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
+    header("Location: ../login.php"); // Thêm "../" để lùi ra một thư mục
     exit();
 }
-require_once("./includes/db_connect.php");
+require_once("../includes/db_connect.php");
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -99,11 +99,10 @@ require_once("./includes/db_connect.php");
 </head>
 <body>
 
-  <?php include 'includes/footer.php'; ?>
-
+  <?php include '../includes/header.php'; ?>
   <header class="admin-header">
     <h1>Bảng điều khiển Quản trị viên</h1>
-    <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+    <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
   </header>
 
   <main class="admin-content">
