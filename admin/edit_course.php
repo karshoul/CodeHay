@@ -203,7 +203,6 @@ $conn->close();
 </head>
 <body>
     <div id="wrapper">
-        <?php include '../includes/header.php'; ?>
 
         <div class="edit-course-container">
             <h2>Sửa Khóa Học</h2>
@@ -254,8 +253,6 @@ $conn->close();
                 <a href="manage_courses.php" class="back-button"><i class="fas fa-arrow-left"></i> Quay lại tất cả khóa học</a>
             </div>
         </div>
-
-        <?php include '../includes/footer.php'; ?>
     </div>
 </body>
 </html>

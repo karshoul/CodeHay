@@ -230,7 +230,9 @@ if (isset($_GET['status'])) {
                             </a>
                             <div class="dropdown-content" id="userDropdownContent">
                                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                    <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển Admin</a>
                                 <?php endif; ?>
+                                <a href="../profile.php"><i class="fas fa-user-circle"></i> Hồ sơ của tôi</a>
                                 <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
                             </div>
                         </div>
@@ -246,6 +248,9 @@ if (isset($_GET['status'])) {
             <h2 class="section-title">Quản Lý Khóa Học</h2>
             <div class="add-course-btn-container">
                 <a href="add_course.php" class="add-course-btn"><i class="fas fa-plus-circle"></i> Thêm Khoá Học Mới</a>
+            </div>
+            <div style="text-align: center;">
+                <a href="admin_dashboard.php" class="back-button"><i class="fas fa-arrow-left"></i> Quay lại trang quản lí</a>
             </div>
             <?php echo $message; // Hiển thị thông báo ?>
 
@@ -282,40 +287,7 @@ if (isset($_GET['status'])) {
                 <p class="no-courses-found">Không tìm thấy khóa học nào để quản lý.</p>
             <?php endif; ?>
         </div>
-
-        <div id="footer">
-            <div class="footer-content">
-                <div class="footer-column about-us">
-                    <h3>Về Code Hay</h3>
-                    <p>Chúng tôi cung cấp các khóa học lập trình chất lượng, giúp bạn dễ dàng tiếp cận và làm chủ thế giới công nghệ.</p>
-                    <div class="social-media">
-                        <h3>Theo dõi chúng tôi</h3>
-                        <div class="social-icons">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-column quick-links">
-                    <h3>Liên kết nhanh</h3>
-                    <ul>
-                        <li><a href="../index.php#banner">Trang chủ</a></li> <li><a href="../index.php#courses-section">Khoá học</a></li> <li><a href="../index.php#blog-section">Blog</a></li> <li><a href="../index.php#contact-section">Liên hệ</a></li> <li><a href="#">Chính sách bảo mật</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column contact-info-footer">
-                    <h3>Thông tin liên hệ</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 132 Nguyễn Đệ, Bình Thuỷ, TP Cần Thơ</p>
-                    <p><i class="fas fa-phone"></i> +84 798 059 074</p>
-                    <p><i class="fas fa-envelope"></i> hotro@codehay.vn</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <?php echo date("Y"); ?> Code Hay. All rights reserved.</p>
-            </div>
-        </div>
-        </div>
+    </div>
     <script>
     // JavaScript để xử lý dropdown menu (nếu bạn có)
     document.addEventListener('DOMContentLoaded', function() {

@@ -126,39 +126,6 @@ if (isset($_GET['message'])) {
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <div id="header">
-                <a href="../index.php" class="logo">
-                    <span>CODE HAY</span>
-                </a>
-                <div id="menu">
-                    <div class="item"><a href="../index.php">Trang chủ</a></div>
-                    <div class="item"><a href="../index.php#courses-section">Khoá học</a></div>
-                    <div class="item"><a href="../index.php#blog-section">Blog</a></div>
-                    <div class="item"><a href="../index.php#contact-section">Liên hệ</a></div>
-                </div>
-                <div class="actions">
-                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                        <div class="item dropdown">
-                            <a href="#" class="dropbtn" id="userDropdownBtn"> <i class="fas fa-user"></i>
-                                <span>Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                                <i class="fas fa-caret-down"></i>
-                            </a>
-                            <div class="dropdown-content" id="userDropdownContent">
-                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                    <a href="manage_courses.php"><i class="fas fa-cogs"></i> Quản lý Khóa học</a>
-                                <?php endif; ?>
-                                <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <div class="item">
-                            <a href="../login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </header>
 
         <div class="add-course-container">
             <h2>Thêm Khóa Học Mới</h2>
@@ -188,8 +155,6 @@ if (isset($_GET['message'])) {
                 <a href="manage_courses.php" class="btn btn-secondary back-button-add-course" style="margin-top: 15px; display: inline-block;">Quay lại Quản lý Khóa học</a>
             </form>
         </div>
-
-        <?php include '../includes/footer.php'; ?>
     </div>
     <script>
     // JavaScript để xử lý dropdown menu (nếu bạn có)
