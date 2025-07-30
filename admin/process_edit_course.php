@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../includes/db_connect.php'; // Kết nối cơ sở dữ liệu
+require_once '../includes/db_connect.php';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa và có vai trò admin không
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $duration = trim($_POST['duration'] ?? '');
-    // $rating = $_POST['rating'] ?? null; // Đã bỏ trường rating
     $old_image = $_POST['old_image'] ?? ''; // Lấy tên ảnh cũ
 
     $new_image_name = $old_image; // Mặc định giữ ảnh cũ
@@ -22,15 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = '';
     $message_type = 'error';
 
-    // Validate inputs
+    // Xấc thực
     if (empty($course_id) || !is_numeric($course_id)) {
         $message = "ID khóa học không hợp lệ.";
-    } elseif (empty($title) || empty($description) || empty($duration)) { // Đã bỏ validation cho rating
+    } elseif (empty($title) || empty($description) || empty($duration)) {
         $message = "Vui lòng điền đầy đủ và đúng định dạng các thông tin cần thiết.";
     } else {
         // Xử lý tải lên ảnh mới (nếu có)
         if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-            $target_dir = "assets/img/"; // Đảm bảo đường dẫn này đúng với cấu trúc thư mục của bạn
+            $target_dir = "../assets/img/"; // Đảm bảo đường dẫn này đúng với cấu trúc thư mục của bạn
             $file_extension = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
             $allowed_extensions = array("jpg", "jpeg", "png", "webp");
 
@@ -58,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Nếu không có lỗi nào từ việc tải ảnh hoặc không có ảnh mới, tiến hành cập nhật DB
         if (empty($message) || $message_type == 'success') { // Chỉ cập nhật nếu không có lỗi hoặc lỗi chỉ liên quan đến ảnh mà ảnh không bắt buộc
             if ($conn) {
-                // Đã bỏ cột 'rating' khỏi câu lệnh UPDATE
+
                 $sql = "UPDATE courses SET title = ?, description = ?, image = ?, duration = ?, updated_at = NOW() WHERE id = ?";
                 $stmt = $conn->prepare($sql);
 

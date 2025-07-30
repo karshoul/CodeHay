@@ -18,17 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
     $duration = trim($_POST['duration']);
-    // Đã bỏ biến $rating
 
     $image_name = null;
 
-    // Validate inputs (đã bỏ kiểm tra $rating)
+    // Kiểm tra các trường dữ liệu bắt buộc
     if (empty($title) || empty($description) || empty($duration)) {
         header("Location: add_course.php?message=Vui lòng điền đầy đủ tất cả các trường.&type=error");
         exit();
     }
-
-    // Đã bỏ kiểm tra rating < 0 hoặc rating > 5
 
     // Xử lí ảnh
     if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
@@ -50,15 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: add_course.php?message=Có lỗi xảy ra khi tải ảnh lên.&type=error");
             exit();
         }
+    // Nếu không ảnh hoặc lỗi ảnh
     } else {
         header("Location: add_course.php?message=Vui lòng chọn một ảnh cho khóa học.&type=error");
         exit();
     }
 
-    // Insert course into database (đã bỏ cột rating)
+    // Chèn dữ liệu khoá học vào cơ sơ dữ liệu
     $stmt = $conn->prepare("INSERT INTO courses (title, description, image, duration) VALUES (?, ?, ?, ?)");
     if ($stmt) {
-        // Đã bỏ tham số $rating
+        
         $stmt->bind_param("ssss", $title, $description, $image_name, $duration);
 
         if ($stmt->execute()) {

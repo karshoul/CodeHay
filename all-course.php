@@ -96,7 +96,6 @@ $totalPages = ceil($totalCourses / $limit);
             </div>
         </div>
         <script>
-            // JavaScript for dropdown functionality
             document.addEventListener('DOMContentLoaded', function() {
                 const dropdown = document.querySelector('.dropdown');
                 if (dropdown) {
@@ -104,11 +103,10 @@ $totalPages = ceil($totalCourses / $limit);
                     const dropdownContent = dropdown.querySelector('.dropdown-content');
 
                     dropbtn.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent default link behavior
+                        event.preventDefault();
                         dropdownContent.classList.toggle('show');
                     });
 
-                    // Close the dropdown if the user clicks outside of it
                     window.addEventListener('click', function(event) {
                         if (!event.target.matches('.dropbtn') && !event.target.closest('.dropdown-content')) {
                             if (dropdownContent.classList.contains('show')) {

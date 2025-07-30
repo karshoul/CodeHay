@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../login.php"); // Thêm "../" để lùi ra một thư mục
+    header("Location: ../login.php");
     exit();
 }
 require_once("../includes/db_connect.php");

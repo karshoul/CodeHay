@@ -53,7 +53,7 @@ $result_blogs = $conn->query($sql_blogs);
                 </div>
             <?php else: ?>
                 <div class="item">
-                    <a href="login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+                    <a href="login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i> Đăng nhập/Đăng ký</a>
                 </div>
             <?php endif; ?>
         </div>

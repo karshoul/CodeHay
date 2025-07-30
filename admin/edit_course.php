@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once '../includes/db_connect.php'; // Kết nối cơ sở dữ liệu
+require_once '../includes/db_connect.php';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa và có vai trò admin không
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php"); // Chuyển hướng về trang đăng nhập nếu chưa đăng nhập hoặc không phải admin
+    header("Location: login.php");
     exit();
 }
 
@@ -17,7 +17,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $course_id = (int)$_GET['id'];
 
     if ($conn) {
-        // Truy vấn để lấy thông tin khóa học hiện tại (đã bỏ cột 'rating')
+
         $stmt = $conn->prepare("SELECT id, title, description, image, duration FROM courses WHERE id = ?");
         if ($stmt) {
             $stmt->bind_param("i", $course_id);
@@ -61,7 +61,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* CSS cho form chỉnh sửa khóa học (tương tự add_course.php nhưng có thể tùy chỉnh) */
+        
         .edit-course-container {
             background-color: var(--white);
             padding: 40px;

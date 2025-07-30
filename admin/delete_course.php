@@ -7,7 +7,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit();
 }
-// Nếu có hệ thống vai trò, thêm kiểm tra: if ($_SESSION['role'] !== 'admin') { ... }
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $course_id = (int)$_GET['id'];

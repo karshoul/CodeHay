@@ -7,7 +7,7 @@
     <title>Đăng ký - Code Hay</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        /* CSS tương tự như login.html, có thể tái sử dụng hoặc điều chỉnh */
+        
         body {
             display: flex;
             justify-content: center;
